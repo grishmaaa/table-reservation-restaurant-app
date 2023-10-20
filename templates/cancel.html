@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cancel Reservation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Cancel Reservation</h1>
+        <p>Are you sure you want to cancel this reservation?</p>
+        <p><strong>Reservation Details:</strong></p>
+        <p><strong>Name:</strong> {{ reservation[1] }}</p>
+        <p><strong>Email:</strong> {{ reservation[2] }}</p>
+        <p><strong>Phone:</strong> {{ reservation[3] }}</p>
+        <p><strong>Number of People:</strong> {{ reservation[4] }}</p>
+        <p><strong>Date:</strong> {{ reservation[5] }}</p>
+        <p><strong>Time:</strong> {{ reservation[6] }}</p>
+        <form method="post">
+            <input type="submit" value="Cancel Reservation" class="cancel-button">
+        </form>
+        <a href="{{ url_for('reservations') }}">Back to Reservations</a>
+    </div>
+</body>
+</html>

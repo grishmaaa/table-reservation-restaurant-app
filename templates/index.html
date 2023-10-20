@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restaurant Table Reservation</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Restaurant Table Reservation</h1>
+    
+    <form method="POST" action="/reserve">
+        <label>Name: <input type="text" name="name" required></label>
+        <label>Date: <input type="date" name="date" required></label>
+        <label>Time: <input type="time" name="time" required></label>
+        <button type="submit">Reserve</button>
+    </form>
+
+    <h2>Reservations</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        {% for reservation in reservations %}
+        <tr>
+            <td>{{ reservation[1] }}</td>
+            <td>{{ reservation[2] }}</td>
+            <td>{{ reservation[3] }}</td>
+            <td>{{ reservation[4] }}</td>
+            <td>
+                {% if reservation[4] == "Reserved" %}
+                <a href="/cancel/{{ reservation[0] }}">Cancel</a>
+                <form method="POST" action="/update/{{ reservation[0] }}">
+                    <label>New Date: <input type="date" name="new_date" required></label>
+                    <label>New Time: <input type="time" name="new_time" required></label>
+                    <button type="submit">Change</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
